@@ -1,0 +1,139 @@
+/*!
+ * Giscus Theme: Material Design 1 (MDUI v1 Inspired)
+ */
+
+main {
+  /* =======================================
+     1. 颜色变量 (基于 MD1 规范)
+     ======================================= */
+  
+  /* 背景色 */
+  --color-canvas-default: #ffffff; /* 卡片背景 */
+  --color-canvas-subtle: #f5f5f5; /* 整体页面背景 */
+  --color-canvas-overlay: #ffffff;
+  
+  /* 边框 (MD1 较少用实线边框，主要靠阴影，这里设为透明或极淡) */
+  --color-border-default: transparent;
+  --color-border-muted: #e0e0e0;
+
+  /* 文字颜色 (MD 经典的透明度黑色) */
+  --color-fg-default: rgba(0, 0, 0, 0.87); /* 主文本 */
+  --color-fg-muted: rgba(0, 0, 0, 0.54);   /* 次要文本 */
+  --color-fg-subtle: rgba(0, 0, 0, 0.38);  /* 禁用文本 */
+
+  /* 主色调: Indigo 500 (#3f51b5) */
+  --color-accent-fg: #3f51b5;
+  --color-accent-emphasis: #3f51b5;
+  --color-accent-muted: rgba(63, 81, 181, 0.12);
+
+  /* 危险/警告色: Red 500 */
+  --color-danger-fg: #f44336;
+  --color-danger-emphasis: #f44336;
+
+  /* 默认按钮 */
+  --color-btn-text: rgba(0, 0, 0, 0.87);
+  --color-btn-bg: #f5f5f5;
+  --color-btn-border: transparent;
+  --color-btn-hover-bg: #eeeeee;
+  --color-btn-active-bg: #e0e0e0;
+
+  /* 主色调按钮 (Primary Button) */
+  --color-btn-primary-text: #ffffff;
+  --color-btn-primary-bg: #3f51b5;
+  --color-btn-primary-border: transparent;
+  --color-btn-primary-hover-bg: #303f9f;
+
+  /* 输入框焦点 */
+  --color-primer-border-active: #3f51b5;
+}
+
+/* =======================================
+   2. MD1 组件样式重写
+   ======================================= */
+
+/* 全局字体 (Roboto) */
+.giscus {
+  font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* 评论卡片 (Card 样式: 2px圆角 + z-depth-1) */
+.giscus-comment {
+  background-color: #ffffff;
+  border-radius: 2px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important;
+  border: none !important;
+  margin-bottom: 16px;
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 评论输入框 (Textfield 样式: 取消边框，仅保留底部主色边框) */
+.form-control {
+  border: none !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42) !important;
+  border-radius: 2px 2px 0 0 !important;
+  background-color: rgba(0, 0, 0, 0.04) !important; /* MD1 的浅色填充输入框风格 */
+  box-shadow: none !important;
+  transition: border-bottom-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s;
+}
+
+.form-control:focus {
+  border-bottom: 2px solid #3f51b5 !important;
+  background-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: none !important;
+}
+
+/* 实色按钮 (Raised Button: 2px圆角 + 阴影 + 大写) */
+.btn {
+  border-radius: 2px !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.5px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important;
+  transition: background-color 0.2s, box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: none !important;
+  padding: 8px 16px !important;
+}
+
+/* 按钮悬浮加深阴影 (z-depth-2) */
+.btn:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
+}
+
+/* 扁平/图标按钮 (Icon/Flat Button) 取消阴影 */
+.btn-invisible, 
+.timeline-comment-action {
+  box-shadow: none !important;
+  text-transform: none !important;
+  background-color: transparent !important;
+}
+
+.btn-invisible:hover,
+.timeline-comment-action:hover {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: none !important;
+}
+
+/* 头像圆润 + 微投影 */
+.avatar {
+  border-radius: 50% !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* 表情回应 (Chip 样式) */
+.reaction-button {
+  border-radius: 16px !important;
+  border: 1px solid #e0e0e0 !important;
+  background-color: #ffffff !important;
+  transition: background-color 0.2s;
+}
+
+.reaction-button:hover {
+  background-color: #f5f5f5 !important;
+}
+
+/* 选中的表情回应 */
+.reaction-button[aria-pressed="true"] {
+  background-color: rgba(63, 81, 181, 0.12) !important;
+  border-color: #3f51b5 !important;
+  color: #3f51b5 !important;
+}
