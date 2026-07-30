@@ -1,147 +1,373 @@
-/*!
- * Giscus Theme: Material Design 1 (MDUI-inspired)
- * Colors: Light Green & Lime (Primary), Red & Amber (Auxiliary)
- * Style: Strict No-Border-Radius (except avatars), z-depth shadows
+/**
+ * Giscus MD1 Theme
+ * 基于 MDUI 1.x (Material Design 1) 设计规范
+ * 适配亮色/暗色模式
  */
 
-main {
-  /* ====================
-     MD1 色板定义
-     ==================== */
-  /* 主背景与纸张色 */
-  --color-canvas-default: #FAFAFA; /* MD Grey 50 */
-  --color-canvas-subtle: #F5F5F5;  /* MD Grey 100 */
-  --color-border-default: #E0E0E0; /* MD Grey 300 */
-  --color-border-muted: #EEEEEE;   /* MD Grey 200 */
+/* ===== 基础容器 ===== */
+.giscus {
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", sans-serif;
+  color: rgba(0, 0, 0, 0.87);
+  line-height: 1.6;
+}
 
-  /* 文本颜色 (标准 MD 黑色透明度) */
-  --color-fg-default: rgba(0, 0, 0, 0.87);
-  --color-fg-muted: rgba(0, 0, 0, 0.54);
-  --color-fg-subtle: rgba(0, 0, 0, 0.38);
-
-  /* 主视觉色：Light Green 500 (#8BC34A) */
-  --color-accent-fg: #8BC34A; 
-  --color-accent-emphasis: #7CB342; /* Light Green 600 */
-  --color-accent-muted: rgba(139, 195, 74, 0.4);
-  --color-accent-subtle: rgba(139, 195, 74, 0.1);
-
-  /* 危险与警告：Red 500 (#F44336) & Amber 500 (#FFC107) */
-  --color-danger-fg: #F44336; 
-  --color-danger-emphasis: #E53935; /* Red 600 */
-  --color-attention-fg: #FFC107; 
-  --color-attention-emphasis: #FFB300; /* Amber 600 */
+/* ===== 暗色模式适配 ===== */
+@media (prefers-color-scheme: dark) {
+  .giscus {
+    color: rgba(255, 255, 255, 0.87);
+  }
   
-  /* 成功色也可统一使用主色或绿系 */
-  --color-success-fg: #4CAF50; /* Green 500 */
-
-  /* ====================
-     按钮配置 (Lime 系)
-     ==================== */
-  /* 普通按钮 (默认质感) */
-  --color-btn-text: rgba(0, 0, 0, 0.87);
-  --color-btn-bg: #F5F5F5;
-  --color-btn-border: transparent;
-  --color-btn-hover-bg: #EEEEEE;
-  --color-btn-hover-border: transparent;
-  --color-btn-active-bg: #E0E0E0;
-  --color-btn-active-border: transparent;
-
-  /* 主按钮 (Lime 500 - #CDDC39) */
-  --color-btn-primary-text: rgba(0, 0, 0, 0.87); /* Lime下黑字辨识度更高 */
-  --color-btn-primary-bg: #CDDC39;
-  --color-btn-primary-border: transparent;
-  --color-btn-primary-hover-bg: #C0CA33; /* Lime 600 */
-  --color-btn-primary-hover-border: transparent;
-  --color-btn-primary-active-bg: #AFB42B; /* Lime 700 */
-  --color-btn-primary-active-border: transparent;
-  --color-btn-primary-disabled-text: rgba(0, 0, 0, 0.38);
-  --color-btn-primary-disabled-bg: rgba(205, 220, 57, 0.5);
-  --color-btn-primary-disabled-border: transparent;
+  .giscus .comment-thread {
+    background-color: #1e1e1e;
+  }
+  
+  .giscus .comment {
+    background-color: #2d2d2d;
+    border-color: #3d3d3d;
+  }
+  
+  .giscus .comment-header,
+  .giscus .comment-body {
+    border-bottom-color: #3d3d3d;
+  }
+  
+  .giscus .comment-author {
+    color: rgba(255, 255, 255, 0.87);
+  }
+  
+  .giscus .comment-text {
+    color: rgba(255, 255, 255, 0.87);
+  }
+  
+  .giscus .comment-text p {
+    color: rgba(255, 255, 255, 0.87);
+  }
+  
+  .giscus .comment-text a {
+    color: #90caf9;
+  }
+  
+  .giscus .comment-text a:hover {
+    color: #64b5f6;
+  }
+  
+  .giscus .comment-actions button {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .giscus .comment-actions button:hover {
+    color: rgba(255, 255, 255, 0.87);
+  }
+  
+  .giscus .pagination button {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .giscus .pagination button:hover {
+    color: rgba(255, 255, 255, 0.87);
+  }
+  
+  .giscus .pagination .active {
+    color: #90caf9;
+  }
+  
+  .giscus .form-input,
+  .giscus .form-textarea {
+    background-color: #2d2d2d;
+    border-color: #3d3d3d;
+    color: rgba(255, 255, 255, 0.87);
+  }
+  
+  .giscus .form-input:focus,
+  .giscus .form-textarea:focus {
+    border-color: #90caf9;
+  }
+  
+  .giscus .form-input::placeholder,
+  .giscus .form-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.38);
+  }
 }
 
-/* ====================
-   MD1 核心形状与交互覆写
-   ==================== */
-
-/* 1. 绝对无圆角裁切 (除了头像) */
-.giscus-frame,
-.giscus-comment,
-.Box,
-.btn,
-button,
-input,
-textarea,
-.pagination-loader-container {
-  border-radius: 0 !important;
+/* ===== 评论线程容器 ===== */
+.giscus .comment-thread {
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  padding: 16px;
 }
 
-/* 遵循 MD1 规范，Avatar 依然必须是完美的圆形 */
-img.avatar,
-.avatar {
-  border-radius: 50% !important;
+/* ===== 评论卡片 ===== */
+.giscus .comment {
+  background-color: #fafafa;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 16px;
+  padding: 16px;
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 2. 评论框纸张化与 MD1 z-depth-1 阴影 */
-.giscus-comment {
-  border: none !important;
-  background-color: #FFFFFF !important;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 
-              0 3px 1px -2px rgba(0,0,0,0.12), 
-              0 1px 5px 0 rgba(0,0,0,0.2) !important;
-  margin-bottom: 16px !important;
-  transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.giscus .comment:hover {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
 }
 
-/* 3. 按钮 MD1 风格化 (大写、阴影、悬浮态) */
-.btn, button {
-  text-transform: uppercase !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.5px !important;
-  border: none !important;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 
-              0 3px 1px -2px rgba(0,0,0,0.12), 
-              0 1px 5px 0 rgba(0,0,0,0.2) !important;
-  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
-              background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+/* ===== 评论头部 ===== */
+.giscus .comment-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-.btn:hover, button:hover {
-  box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 
-              0 1px 7px 0 rgba(0,0,0,0.12), 
-              0 3px 1px -1px rgba(0,0,0,0.2) !important;
+.giscus .comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
-.btn:active, button:active {
-  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 
-              0 1px 10px 0 rgba(0,0,0,0.12), 
-              0 2px 4px -1px rgba(0,0,0,0.2) !important;
+.giscus .comment-author {
+  font-weight: 500;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.87);
 }
 
-/* 4. 输入框 MD1 底部高亮下划线风格 */
-.form-control, 
-.giscus-comment-editor {
-  border: 1px solid var(--color-border-default) !important;
-  border-bottom: 2px solid var(--color-border-default) !important;
-  background-color: var(--color-canvas-subtle) !important;
-  box-shadow: none !important;
-  transition: border-bottom-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.giscus .comment-time {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.54);
+  margin-left: auto;
 }
 
-.form-control:focus, 
-.form-control:focus-within,
-.giscus-comment-editor:focus-within {
-  border-bottom-color: var(--color-accent-fg) !important;
-  box-shadow: none !important;
+/* ===== 评论正文 ===== */
+.giscus .comment-body {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-/* 5. 反应区 (Reactions) 轻量化处理 */
-.reaction-button {
-  box-shadow: none !important; /* 反应按钮属于扁平交互，不加投影 */
-  border: 1px solid var(--color-border-default) !important;
-  background-color: transparent !important;
+.giscus .comment-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(0, 0, 0, 0.87);
 }
 
-.reaction-button[aria-pressed="true"] {
-  background-color: var(--color-accent-subtle) !important;
-  border-color: var(--color-accent-fg) !important;
+/* 正文中的排版样式 - 类似 .mdui-typo */
+.giscus .comment-text p {
+  margin: 0 0 16px 0;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.giscus .comment-text p:last-child {
+  margin-bottom: 0;
+}
+
+.giscus .comment-text a {
+  color: #1976d2;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.giscus .comment-text a:hover {
+  color: #0d47a1;
+  text-decoration: underline;
+}
+
+.giscus .comment-text h1,
+.giscus .comment-text h2,
+.giscus .comment-text h3,
+.giscus .comment-text h4,
+.giscus .comment-text h5,
+.giscus .comment-text h6 {
+  margin: 24px 0 16px 0;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.giscus .comment-text h1 { font-size: 34px; }
+.giscus .comment-text h2 { font-size: 28px; }
+.giscus .comment-text h3 { font-size: 24px; }
+.giscus .comment-text h4 { font-size: 20px; }
+.giscus .comment-text h5 { font-size: 18px; }
+.giscus .comment-text h6 { font-size: 16px; }
+
+.giscus .comment-text code {
+  padding: 2px 6px;
+  background-color: rgba(0, 0, 0, 0.06);
+  border-radius: 3px;
+  font-family: "Roboto Mono", "SF Mono", Monaco, "Cascadia Code", "Fira Code", monospace;
+  font-size: 0.875em;
+}
+
+.giscus .comment-text pre {
+  padding: 16px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 16px 0;
+}
+
+.giscus .comment-text pre code {
+  background-color: transparent;
+  padding: 0;
+  font-size: 0.875em;
+}
+
+.giscus .comment-text blockquote {
+  margin: 16px 0;
+  padding: 8px 16px;
+  border-left: 4px solid #e0e0e0;
+  background-color: rgba(0, 0, 0, 0.02);
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.giscus .comment-text ul,
+.giscus .comment-text ol {
+  margin: 0 0 16px 24px;
+  padding: 0;
+}
+
+.giscus .comment-text img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+.giscus .comment-text table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16px 0;
+}
+
+.giscus .comment-text table th,
+.giscus .comment-text table td {
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.giscus .comment-text table th {
+  background-color: #f5f5f5;
+  font-weight: 500;
+}
+
+/* ===== 评论操作按钮 ===== */
+.giscus .comment-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.giscus .comment-actions button {
+  background: none;
+  border: none;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 14px;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+  font-family: inherit;
+}
+
+.giscus .comment-actions button:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.87);
+}
+
+/* ===== 分页 ===== */
+.giscus .pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.giscus .pagination button {
+  background: none;
+  border: none;
+  color: rgba(0, 0, 0, 0.54);
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.giscus .pagination button:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.giscus .pagination .active {
+  color: #1976d2;
+  font-weight: 500;
+}
+
+/* ===== 表单输入 ===== */
+.giscus .form-input,
+.giscus .form-textarea {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.87);
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.giscus .form-input:focus,
+.giscus .form-textarea:focus {
+  outline: none;
+  border-color: #1976d2;
+}
+
+.giscus .form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* ===== 按钮（MD1 风格） ===== */
+.giscus .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #1976d2;
+  color: #ffffff;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.giscus .btn:hover {
+  background-color: #1565c0;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+.giscus .btn:active {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
+}
+
+.giscus .btn-secondary {
+  background-color: transparent;
+  color: #1976d2;
+  box-shadow: none;
+}
+
+.giscus .btn-secondary:hover {
+  background-color: rgba(25, 118, 210, 0.04);
+  box-shadow: none;
 }
