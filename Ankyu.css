@@ -1,0 +1,108 @@
+/*!
+ * Giscus Theme: Strict Right-Angle & Light Green
+ * Custom Request: 0px Border Radius everywhere, Markdown icon left of 'Aa'
+ */
+
+main {
+  /* ====================
+     1. Light Green 色板定义
+     ==================== */
+  --color-canvas-default: transparent;
+  --color-canvas-subtle: transparent;
+  
+  /* 边框颜色使用 Light Green 500 / 400 */
+  --color-border-default: #8BC34A; /* 500 */
+  --color-border-muted: #9CCC65;   /* 400 */
+  
+  /* 文本颜色使用深绿保证对比度和可读性 */
+  --color-fg-default: #33691E;     /* 900 */
+  --color-fg-muted: #558B2F;       /* 800 */
+  --color-fg-subtle: #689F38;      /* 700 */
+
+  /* 强调色 / 链接 */
+  --color-accent-fg: #7CB342;      /* 600 */
+  --color-accent-emphasis: #689F38;/* 700 */
+  --color-accent-muted: rgba(139, 195, 74, 0.4);
+  --color-accent-subtle: rgba(241, 248, 233, 0.8); /* 50 */
+
+  /* 按钮通用色 */
+  --color-btn-text: #558B2F;       /* 800 */
+  --color-btn-bg: transparent;
+  --color-btn-border: #8BC34A;     /* 500 */
+  --color-btn-hover-bg: #F1F8E9;   /* 50 */
+  --color-btn-hover-border: #7CB342;
+  
+  /* Primary 按钮 (如“评论”按钮) */
+  --color-btn-primary-text: #F1F8E9; /* 50 */
+  --color-btn-primary-bg: #8BC34A;   /* 500 */
+  --color-btn-primary-border: #8BC34A;
+  --color-btn-primary-hover-bg: #7CB342; /* 600 */
+}
+
+/* ====================
+   2. 绝对直角指令 (强制执行)
+   ==================== */
+/* 使用通配符直接干掉所有元素的圆角，包括输入框、按钮、甚至是头像 */
+*, *::before, *::after {
+  border-radius: 0 !important;
+}
+
+/* ====================
+   3. 输入框重塑 (图片中的框线设计)
+   ==================== */
+/* 还原输入框的外边框，并使用 Light Green */
+.giscus-comment-editor .form-control {
+  border: 2px solid #8BC34A !important; /* 500 */
+  background-color: transparent !important;
+  color: #33691E !important; /* 900 */
+  padding-bottom: 24px !important; /* 为右下角拖拽条留出余量 */
+}
+
+.giscus-comment-editor .form-control:focus-within {
+  border-color: #689F38 !important; /* 700 */
+  box-shadow: 0 0 0 1px #689F38 !important; /* 增强选中状态的锐利感 */
+}
+
+/* 占位符颜色 */
+.giscus-comment-editor textarea::placeholder {
+  color: #9CCC65 !important; /* 400 */
+}
+
+/* ====================
+   4. Markdown 图标 (M↓) 精准转移
+   ==================== */
+/* 确立编辑器本体为绝对定位的基准坐标系 */
+.giscus-comment-editor {
+  position: relative !important; 
+}
+
+/* 捕获 Markdown 帮助链接，强制飞到右上角 Aa 的左边 */
+.giscus-comment-editor a[href*="markdown"] {
+  position: absolute !important;
+  top: 9px !important;       /* 与 Aa 图标垂直居中对齐 */
+  right: 48px !important;    /* 挤在 Aa (通常在 right: 8px) 的左侧 */
+  z-index: 10;
+  color: #689F38 !important; /* 700 */
+  background: transparent !important;
+  transition: color 0.2s;
+}
+
+.giscus-comment-editor a[href*="markdown"]:hover {
+  color: #33691E !important; /* 900 */
+}
+
+/* ====================
+   5. 顶部信息与评论列表适配 Light Green
+   ==================== */
+.giscus-meta, .giscus-comment .author {
+  color: #33691E !important; /* 900 */
+  font-weight: bold;
+}
+
+/* 格式化工具栏 (Aa等) 颜色调整 */
+.markdown-toolbar button {
+  color: #689F38 !important; /* 700 */
+}
+.markdown-toolbar button:hover {
+  color: #33691E !important; /* 900 */
+}
