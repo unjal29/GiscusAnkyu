@@ -1,147 +1,193 @@
 /*!
- * Giscus Theme: Material Design 1 (MDUI-inspired)
- * Colors: Light Green & Lime (Primary), Red & Amber (Auxiliary)
- * Style: Strict No-Border-Radius (except avatars), z-depth shadows
+ * Giscus Theme: Glassmorphism Anime-Journal Style
+ * Based on provided visual mockups (幻灯片1-6)
  */
 
 main {
   /* ====================
-     MD1 色板定义
+     1. 全局色彩与透明度定义
      ==================== */
-  /* 主背景与纸张色 */
-  --color-canvas-default: #FAFAFA; /* MD Grey 50 */
-  --color-canvas-subtle: #F5F5F5;  /* MD Grey 100 */
-  --color-border-default: #E0E0E0; /* MD Grey 300 */
-  --color-border-muted: #EEEEEE;   /* MD Grey 200 */
-
-  /* 文本颜色 (标准 MD 黑色透明度) */
-  --color-fg-default: rgba(0, 0, 0, 0.87);
-  --color-fg-muted: rgba(0, 0, 0, 0.54);
-  --color-fg-subtle: rgba(0, 0, 0, 0.38);
-
-  /* 主视觉色：Light Green 500 (#8BC34A) */
-  --color-accent-fg: #8BC34A; 
-  --color-accent-emphasis: #7CB342; /* Light Green 600 */
-  --color-accent-muted: rgba(139, 195, 74, 0.4);
-  --color-accent-subtle: rgba(139, 195, 74, 0.1);
-
-  /* 危险与警告：Red 500 (#F44336) & Amber 500 (#FFC107) */
-  --color-danger-fg: #F44336; 
-  --color-danger-emphasis: #E53935; /* Red 600 */
-  --color-attention-fg: #FFC107; 
-  --color-attention-emphasis: #FFB300; /* Amber 600 */
+  /* 完全透明的背景，让你的网页背景图（如阿米娅）透过来 */
+  --color-canvas-default: transparent;
+  --color-canvas-subtle: transparent;
+  --color-border-default: transparent;
+  --color-border-muted: transparent;
   
-  /* 成功色也可统一使用主色或绿系 */
-  --color-success-fg: #4CAF50; /* Green 500 */
+  /* 文本颜色：视觉稿中的深青/墨绿色系 */
+  --color-fg-default: #3b5c5d; 
+  --color-fg-muted: #6b8f8f;
+  --color-fg-subtle: #87a8a8;
 
-  /* ====================
-     按钮配置 (Lime 系)
-     ==================== */
-  /* 普通按钮 (默认质感) */
-  --color-btn-text: rgba(0, 0, 0, 0.87);
-  --color-btn-bg: #F5F5F5;
+  /* 链接与主色调 */
+  --color-accent-fg: #2a8b8c;
+  --color-accent-emphasis: #217576;
+  --color-accent-muted: rgba(42, 139, 140, 0.4);
+  --color-accent-subtle: rgba(42, 139, 140, 0.1);
+
+  /* 按钮通用文字色 */
+  --color-btn-text: #3b5c5d;
+  --color-btn-bg: transparent;
   --color-btn-border: transparent;
-  --color-btn-hover-bg: #EEEEEE;
+  --color-btn-hover-bg: rgba(42, 139, 140, 0.1);
   --color-btn-hover-border: transparent;
-  --color-btn-active-bg: #E0E0E0;
-  --color-btn-active-border: transparent;
-
-  /* 主按钮 (Lime 500 - #CDDC39) */
-  --color-btn-primary-text: rgba(0, 0, 0, 0.87); /* Lime下黑字辨识度更高 */
-  --color-btn-primary-bg: #CDDC39;
-  --color-btn-primary-border: transparent;
-  --color-btn-primary-hover-bg: #C0CA33; /* Lime 600 */
-  --color-btn-primary-hover-border: transparent;
-  --color-btn-primary-active-bg: #AFB42B; /* Lime 700 */
-  --color-btn-primary-active-border: transparent;
-  --color-btn-primary-disabled-text: rgba(0, 0, 0, 0.38);
-  --color-btn-primary-disabled-bg: rgba(205, 220, 57, 0.5);
-  --color-btn-primary-disabled-border: transparent;
 }
 
 /* ====================
-   MD1 核心形状与交互覆写
+   2. 全局重置与清理
    ==================== */
-
-/* 1. 绝对无圆角裁切 (除了头像) */
 .giscus-frame,
 .giscus-comment,
 .Box,
-.btn,
-button,
-input,
-textarea,
-.pagination-loader-container {
+.form-control {
   border-radius: 0 !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* 遵循 MD1 规范，Avatar 依然必须是完美的圆形 */
-img.avatar,
-.avatar {
-  border-radius: 50% !important;
+/* ====================
+   3. 顶部信息栏与表态区
+   ==================== */
+/* 隐藏原生多余的边框和背景，确保文字和原生图标清晰可见 */
+.giscus-meta {
+  color: var(--color-fg-default) !important;
 }
 
-/* 2. 评论框纸张化与 MD1 z-depth-1 阴影 */
+/* 排序下拉菜单透明化 */
+select.form-select {
+  background-color: transparent !important;
+  border: none !important;
+  color: var(--color-fg-default) !important;
+  font-weight: bold;
+}
+
+/* 反应按钮 (恢复原生 Emoji/图标，去除空心圆概念) */
+.reaction-button {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--color-fg-default) !important;
+  padding: 4px 8px !important;
+}
+.reaction-button:hover, .reaction-button[aria-pressed="true"] {
+  background-color: var(--color-accent-subtle) !important;
+}
+/* 确保反应按钮里的 Emoji 和 SVG 正常显示 */
+.reaction-button svg, .reaction-button img {
+  display: inline-block !important;
+}
+
+/* ====================
+   4. 评论输入框 (核心设计)
+   ==================== */
+.giscus-comment-editor {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* 输入区域：左侧指示线设计 (参照幻灯片1/2) */
+.giscus-comment-editor textarea {
+  border-left: 4px solid #3b5c5d !important; /* 左侧深色竖线 */
+  padding-left: 12px !important;
+  color: #3b5c5d !important;
+  font-size: 15px !important;
+  transition: border-color 0.2s;
+}
+
+.giscus-comment-editor textarea:focus {
+  border-left-color: #2a8b8c !important; /* 聚焦时竖线变亮 */
+  outline: none !important;
+}
+
+/* 占位符颜色 */
+.giscus-comment-editor textarea::placeholder {
+  color: #87a8a8 !important;
+}
+
+/* ====================
+   5. 工具栏与按钮区域 (右下角排版)
+   ==================== */
+/* 确保 Markdown 图标 (M) 和 格式化图标 (Aa) 正常显示并融入背景 */
+.markdown-toolbar button {
+  color: #87a8a8 !important;
+  background: transparent !important;
+}
+.markdown-toolbar button:hover {
+  color: #2a8b8c !important;
+}
+
+/* 底部操作区对齐 */
+.giscus-comment-editor .d-flex.flex-justify-end {
+  align-items: center;
+}
+
+/* 核心：将“评”字提交按钮改造为图标悬浮按钮 (FAB) */
+.giscus-comment-editor .btn-primary {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important; /* 强制纯圆 */
+  background-color: #2a8b8c !important; /* 视觉稿中的亮青色 */
+  color: transparent !important; /* 隐藏原有的“评论”/“评”文字 */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(42, 139, 140, 0.3) !important;
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+
+.giscus-comment-editor .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(42, 139, 140, 0.4) !important;
+  background-color: #217576 !important;
+}
+
+/* 使用伪元素注入发送图标 (纸飞机)，完美替代“评”字 */
+.giscus-comment-editor .btn-primary::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background-color: #ffffff; /* 图标颜色为纯白 */
+  /* 这是一个标准的 Paper Plane (发送) SVG */
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2.01 21L23 12 2.01 3 2 10l15 2-15 2z'/%3E%3C/svg%3E") no-repeat center / contain;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2.01 21L23 12 2.01 3 2 10l15 2-15 2z'/%3E%3C/svg%3E") no-repeat center / contain;
+  margin-left: 2px; /* 纸飞机视觉居中微调 */
+}
+
+/* ====================
+   6. 评论列表展示区
+   ==================== */
+/* 最终成品不显示框线 (幻灯片5标注) */
 .giscus-comment {
   border: none !important;
-  background-color: #FFFFFF !important;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 
-              0 3px 1px -2px rgba(0,0,0,0.12), 
-              0 1px 5px 0 rgba(0,0,0,0.2) !important;
-  margin-bottom: 16px !important;
-  transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent !important;
+  padding: 8px 0 !important;
 }
 
-/* 3. 按钮 MD1 风格化 (大写、阴影、悬浮态) */
-.btn, button {
-  text-transform: uppercase !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.5px !important;
-  border: none !important;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 
-              0 3px 1px -2px rgba(0,0,0,0.12), 
-              0 1px 5px 0 rgba(0,0,0,0.2) !important;
-  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
-              background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+/* 头像边框设计 */
+.giscus-comment .avatar {
+  border: 2px solid #3b5c5d !important; /* 深色边框包裹头像 */
+  border-radius: 50% !important;
+  background-color: #ffffff;
 }
 
-.btn:hover, button:hover {
-  box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 
-              0 1px 7px 0 rgba(0,0,0,0.12), 
-              0 3px 1px -1px rgba(0,0,0,0.2) !important;
+/* 评论者名称与标签 */
+.giscus-comment .author {
+  color: #3b5c5d !important;
+  font-weight: bold;
 }
-
-.btn:active, button:active {
-  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 
-              0 1px 10px 0 rgba(0,0,0,0.12), 
-              0 2px 4px -1px rgba(0,0,0,0.2) !important;
-}
-
-/* 4. 输入框 MD1 底部高亮下划线风格 */
-.form-control, 
-.giscus-comment-editor {
-  border: 1px solid var(--color-border-default) !important;
-  border-bottom: 2px solid var(--color-border-default) !important;
-  background-color: var(--color-canvas-subtle) !important;
-  box-shadow: none !important;
-  transition: border-bottom-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.form-control:focus, 
-.form-control:focus-within,
-.giscus-comment-editor:focus-within {
-  border-bottom-color: var(--color-accent-fg) !important;
-  box-shadow: none !important;
-}
-
-/* 5. 反应区 (Reactions) 轻量化处理 */
-.reaction-button {
-  box-shadow: none !important; /* 反应按钮属于扁平交互，不加投影 */
-  border: 1px solid var(--color-border-default) !important;
+.giscus-comment .Label {
   background-color: transparent !important;
+  color: #6b8f8f !important;
+  border: 1px solid #6b8f8f !important;
+  border-radius: 12px !important;
 }
 
-.reaction-button[aria-pressed="true"] {
-  background-color: var(--color-accent-subtle) !important;
-  border-color: var(--color-accent-fg) !important;
+/* 楼中楼回复连接线 (左侧竖线) */
+.giscus-comment-replies {
+  border-left: 2px solid rgba(107, 143, 143, 0.3) !important;
+  margin-left: 20px !important; /* 调整缩进与竖线对齐 */
+  padding-left: 16px !important;
 }
